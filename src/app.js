@@ -7,9 +7,9 @@ app.use(express.json());
 
 app.use('/products', productsRouter);
 
-app.get('/teste', async (req, res) => {
-  return res.status(200).json({ message: 'ok' });
-});
+// app.get('/teste', async (req, res) => {
+//   return res.status(200).json({ message: 'ok' });
+// });
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {

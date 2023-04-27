@@ -5,6 +5,16 @@ const findAll = async (_req, res) => {
   res.status(200).json(allProducts);
 };
 
+const findById = async (req, res) => {
+  const { id } = req.params;
+  const productById = await productsService.findById(id);
+  if (!productById) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  res.status(200).json(productById);
+};
+
 module.exports = {
   findAll,
+  findById,
 };
