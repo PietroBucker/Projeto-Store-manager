@@ -4,10 +4,11 @@ services:
   # Serviço que irá rodar o node
   node:
     # Imagem base do container
-    build: .
+    # build: .
+    image: node:16.14
     # Usuário linux padrão do container, não é recomendado usar root
     # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user
-    user: node
+    # user: node
     # Nome do container para facilitar execução
     container_name: store_manager
     # Mesmo que `docker run -t`
@@ -24,9 +25,10 @@ services:
     volumes:
       # Monta o diretório atual, com todos os dados do projeto, 
       # dentro do diretório /app
-      - ./src/:/app/src
-      - ./tests/:/app/tests
-      - ./__tests__/:/app/__tests__
+      # - ./src/:/app/src
+      # - ./tests/:/app/tests
+      # - ./__tests__/:/app/__tests__
+      - ./:/app 
     # Lista de serviços do qual este serviço depende
     depends_on:
       # Precisa do banco funcionando antes de subir o node
