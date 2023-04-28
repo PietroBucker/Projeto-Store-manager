@@ -19,7 +19,7 @@ describe('Teste de unidade products controller', function () {
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    sinon.stub(productsService, 'findAll').resolves(allProductsMock)
+    sinon.stub(productsService, 'findAll').resolves({type: null, message: allProductsMock })
     
     const allProducts = await productsController.findAll(req, res);
     
@@ -35,7 +35,7 @@ describe('Teste de unidade products controller', function () {
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    sinon.stub(productsService, 'findById').resolves(allProductsMock[0])
+    sinon.stub(productsService, 'findById').resolves({type: null, message: allProductsMock[0]})
     
     await productsController.findById(req, res);
     
@@ -51,11 +51,27 @@ describe('Teste de unidade products controller', function () {
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    sinon.stub(productsService, 'findById').resolves(allProductsMock[9999])
+    sinon.stub(productsService, 'findById').resolves({type: 'PRODUCT_NOT_FOUND', message: 'Product not found'})
     
     await productsController.findById(req, res);
     
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({message: 'Product not found'});
+  })
+
+  it('testa se retorna erro 404 "nao econtrado" ao buscar por id ', async function () {
+   const res = {};
+    const req = {
+      body: { name: 'ProdutoX' }
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productsService, 'insert').resolves({type: null, message: 4})
+    
+    await productsController.insert(req, res);
+    
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith({id: 4, name: 'ProdutoX'});
   })
 })

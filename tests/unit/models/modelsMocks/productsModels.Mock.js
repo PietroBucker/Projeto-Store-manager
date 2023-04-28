@@ -13,6 +13,8 @@ const allProductsMock = [
   }
 ]
 
+
+const insertBody = 
 module.exports = {
 allProductsMock,
 };

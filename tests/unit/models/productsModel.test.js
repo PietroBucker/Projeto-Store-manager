@@ -31,4 +31,12 @@ describe('Teste de unidade products model', function () {
   
     expect(result).to.be.equal(allProductsMock[0]);
   })
+
+  it('testa se cadastra corretamente um produto', async function () {
+    sinon.stub(connection, 'execute').resolves([{insertId: 4}]);
+
+    const result = await productsModel.insert(1);
+  
+    expect(result).to.equal(4);
+  })
 })
