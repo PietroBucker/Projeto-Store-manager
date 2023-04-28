@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', productsController.findAll);
 
-router.get('/:id', validateName, productsController.findById);
+router.get('/:id', productsController.findById);
 
 router.post('/', validateName, productsController.insert);
 module.exports = router;
