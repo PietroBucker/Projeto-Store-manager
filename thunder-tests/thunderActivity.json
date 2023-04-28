@@ -150,12 +150,12 @@
     "method": "PUT",
     "sortNum": 0,
     "created": "2023-04-28T21:39:11.296Z",
-    "modified": "2023-04-28T21:48:00.937Z",
+    "modified": "2023-04-28T22:05:27.614Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Martelo do Batman2\"\n}",
+      "raw": "{\n  \"name\": \"Martelo do Batman22\"\n}",
       "form": []
     },
     "tests": []

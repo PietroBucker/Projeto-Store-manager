@@ -50,9 +50,23 @@ const vlaidadeProductId = async (req, res, next) => {
   return next();
 };
 
+const validateUpDateById = async (req, res, next) => {
+  const { id } = req.params;
+  const { message: products } = await productsService.findAll();
+  const searchProdcts = products.map((product) => product.id);
+
+  const validateById = searchProdcts.includes(id);
+
+   if (!validateById) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  return next();
+};
+
 module.exports = {
   validateName,
   validateSalesKey,
   validadeQuantity,
   vlaidadeProductId,
+  validateUpDateById,
 };
