@@ -23,11 +23,9 @@ const insert = async (req, res) => {
 const upDate = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
-  const { type, message } = await productsService.upDate(id, name);
-  if (type) {
-    return res.status(404).json(message);
-  }
- return res.status(200).json({ id, name });
+  await productsService.upDate(id, name);
+ 
+  return res.status(200).json({ id, name });
 };
 
 module.exports = {

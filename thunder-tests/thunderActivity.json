@@ -178,5 +178,43 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "389b3e42-f95a-45fa-a730-caf5757fae9a",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/products/13443",
+    "url": "http://localhost:3001/products/13443",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-04-28T22:50:42.110Z",
+    "modified": "2023-04-28T22:50:42.110Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Martelo do Batman22\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "43080dfa-257a-4f27-b40d-c772c6f28360",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/products/1232",
+    "url": "http://localhost:3001/products/1232",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-04-29T00:10:17.589Z",
+    "modified": "2023-04-29T00:10:17.589Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Martelo do Batman22\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

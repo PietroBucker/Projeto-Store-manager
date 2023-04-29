@@ -52,13 +52,9 @@ const vlaidadeProductId = async (req, res, next) => {
 
 const validateUpDateById = async (req, res, next) => {
   const { id } = req.params;
-  const { message: products } = await productsService.findAll();
-  const searchProdcts = products.map((product) => product.id);
-
-  const validateById = searchProdcts.includes(id);
-
-   if (!validateById) {
-    return res.status(404).json({ message: 'Product not found' });
+  const { type, message } = await productsService.findById(id);
+   if (type) {
+     return res.status(404).json({ message });
   }
   return next();
 };
