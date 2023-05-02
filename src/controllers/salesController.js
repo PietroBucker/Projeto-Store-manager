@@ -8,7 +8,6 @@ const findAll = async (_req, res) => {
 const findById = async (req, res) => {
   const { id } = req.params;
   const salesById = await salesService.findById(id);
-  console.log(salesById);
   if (salesById.type) {
     return res.status(404).json({ message: salesById.message });
   }
@@ -24,8 +23,29 @@ const insert = async (req, res) => {
   });
 };
 
+const upDate = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  const result = await salesService.upDate(id, body);
+ if (result.type) {
+    return res.status(404).json({ message: result.message });
+ }
+  return res.status(200).json({ saleId: id, itemsUpdated: body });
+};
+
+const salesDelete = async (req, res) => {
+  const { id } = req.params;
+  const result = await salesService.salesDelete(id);
+  if (result.type) {
+    return res.status(404).json({ message: result.message });
+  }
+    return res.status(204).json(result);
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
+  upDate,
+  salesDelete,
 };

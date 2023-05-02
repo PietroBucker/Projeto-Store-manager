@@ -43,4 +43,22 @@ describe('Teste de unidade products services', function () {
     expect(productById.type).to.be.equal(null)
     expect(productById.message).to.equal(4)
   })
+
+  it('testa se atualiza corretamente um produto', async function () {
+    sinon.stub(productsModel, 'upDate').resolves(1);
+
+    const productById = await productsService.upDate(1);
+    
+    expect(productById.type).to.be.equal(null)
+    expect(productById.message).to.equal('')
+  })
+
+  it('testa se nao consegue atualiza corretamente um produto', async function () {
+    sinon.stub(productsModel, 'upDate').resolves(0);
+
+    const productById = await productsService.upDate(1);
+    
+    expect(productById.type).to.be.equal('PRODUCT_NOT_FOUND')
+    expect(productById.message).to.equal('Product not found')
+  })
 })

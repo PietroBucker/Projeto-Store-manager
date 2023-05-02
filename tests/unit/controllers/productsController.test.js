@@ -1,3 +1,5 @@
+// ideia a implementar: Da para separar os test de unidade,
+// em arquivos separados por EndPoint para facilitar o entendimento
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
@@ -59,19 +61,36 @@ describe('Teste de unidade products controller', function () {
     expect(res.json).to.have.been.calledWith({message: 'Product not found'});
   })
 
-  it('testa se retorna erro 404 "nao econtrado" ao buscar por id ', async function () {
+   it('testa se possivel inserir um produto ', async function () {
    const res = {};
     const req = {
-      body: { name: 'ProdutoX' }
+     body: { name: 'ProdutoX' }
     };
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    sinon.stub(productsService, 'insert').resolves({type: null, message: 4})
+    sinon.stub(productsService, 'insert').resolves({ type: null, message: 4 })
     
     await productsController.insert(req, res);
     
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith({id: 4, name: 'ProdutoX'});
+  })
+
+  it('testa se e possivel atualizar um produto ', async function () {
+   const res = {};
+    const req = {
+      params: { id: 1},
+      body: { name: 'ProdutoX2' }
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productsService, 'upDate').resolves({type: null, message: ''})
+    
+    await productsController.upDate(req, res);
+    
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith({id: 1, name: 'ProdutoX2'});
   })
 })

@@ -23,9 +23,20 @@ const insert = async (req, res) => {
 const upDate = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
-  await productsService.upDate(id, name);
- 
-  return res.status(200).json({ id, name });
+  const result = await productsService.upDate(id, name);
+  if (result.type) {
+    return res.status(404).json({ message: result.message });
+  }
+    return res.status(200).json({ id, name });
+};
+
+const productDelete = async (req, res) => {
+  const { id } = req.params;
+  const result = await productsService.productDelete(id);
+  if (result.type) {
+    return res.status(404).json({ message: result.message });
+  }
+    return res.status(204).json(result);
 };
 
 module.exports = {
@@ -33,4 +44,5 @@ module.exports = {
   findById,
   insert,
   upDate,
+  productDelete,
 };

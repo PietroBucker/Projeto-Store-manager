@@ -18,8 +18,26 @@ const insert = async (saleData) => {
     return { type: null, message: insertId };
 };
 
+const upDate = async (id, body) => {
+  const affectedRows = await salesModel.upDate(id, body);
+  if (affectedRows === 0) {
+    return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
+  }
+    return { type: null, message: '' };
+};
+
+const salesDelete = async (id) => {
+  const affectedRows = await salesModel.salesDelete(id);
+  if (affectedRows === 0) {
+    return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
+  }
+  return { type: null, message: '' };
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
+  upDate,
+  salesDelete,
 };

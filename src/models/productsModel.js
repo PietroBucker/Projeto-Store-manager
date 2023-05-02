@@ -33,7 +33,14 @@ const upDate = async (id, name) => {
       WHERE id = (?)`,
     [name, id],
   );
-  console.log(affectedRows);
+  return affectedRows;
+};
+
+const productDelete = async (id) => {
+  const [{ affectedRows }] = await connection.execute(
+    'DELETE FROM products WHERE id = (?);',
+    [id],
+  );
   return affectedRows;
 };
 
@@ -42,6 +49,7 @@ module.exports = {
   findById,
   insert,
   upDate,
+  productDelete,
 };
 
 // const teste = { name: 'pietro', teste: 'teste' };
