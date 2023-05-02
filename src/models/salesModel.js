@@ -50,9 +50,10 @@ const insert = async (saleData) => {
 const upDate = async (id, body) => {
   const [[{ affectedRows }]] = await Promise.all(body.map(async (element) => connection.execute(
       `UPDATE sales_products
-      SET product_id = (?), quantity = (?)
-      WHERE sale_id = (?)`,
-      [element.productId, element.quantity, Number(id)],
+      SET quantity = (?)
+      WHERE sale_id = (?) AND product_id = (?)`,
+    [element.quantity, id, element.productId],
+      
   )));
 
   return affectedRows;
