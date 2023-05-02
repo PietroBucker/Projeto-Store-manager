@@ -13,6 +13,14 @@ const findById = async (id) => {
   return { type: null, message: productById };
 };
 
+const findByQuery = async (name) => {
+  const result = await productsModel.findByQuery(name);
+  if (!result) {
+    return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+  }
+    return { type: null, message: result };
+};
+
 const insert = async (productDate) => {
   const insertId = await productsModel.insert(productDate);
   return { type: null, message: insertId };
@@ -37,6 +45,7 @@ const productDelete = async (id) => {
 module.exports = {
   findAll,
   findById,
+  findByQuery,
   insert,
   upDate,
   productDelete,

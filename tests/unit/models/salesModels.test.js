@@ -24,7 +24,7 @@ describe('Teste de unidade sales model', function () {
     expect(result).to.be.deep.equal(ByIdSalesMockReturnBD);
   })
 
-  it('testa se deleta corretamente um produto', async function () {
+  it('testa se insere corretamente um venda', async function () {
     sinon.stub(connection, 'execute').resolves([{insertId: 4}]);
 
     const result = await salesModel.insert( [{
@@ -35,11 +35,27 @@ describe('Teste de unidade sales model', function () {
     expect(result).to.equal(4);
   })
 
-  // it('testa se cadastra corretamente um produto', async function () {
-  //   sinon.stub(connection, 'execute').resolves([]);
+  it('testa se atualiza corretamente um venda', async function () {
+    sinon.stub(connection, 'execute').resolves([{affectedRows: 1}]);
 
-  //   const result = await salesModel.salesDelete(33);
+    const result = await salesModel.upDate(1, [{productId: 10, quantity: 5}]);
   
-  //   expect(result).to.equal();
-  // })
+    expect(result).to.equal(1);
+  })
+
+  it('testa nao atualiza corretamente um venda', async function () {
+    sinon.stub(connection, 'execute').resolves([{affectedRows: 0}]);
+
+    const result = await salesModel.upDate(9999, [{productId: 10, quantity: 5}]);
+  
+    expect(result).to.equal(0);
+  })
+
+  it('testa deleta corretamente um venda', async function () {
+    sinon.stub(connection, 'execute').resolves([{affectedRows: 1}]);
+
+    const result = await salesModel.salesDelete(9999);
+  
+    expect(result).to.equal(1);
+  })
 })

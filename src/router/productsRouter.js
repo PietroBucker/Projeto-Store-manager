@@ -4,9 +4,11 @@ const { validateName, validateUpDateById } = require('../middleware/validations'
 
 const router = express.Router();
 
-router.get('/', productsController.findAll);
+router.get('/search', productsController.findByQuery);
 
 router.get('/:id', productsController.findById);
+
+router.get('/', productsController.findAll);
 
 router.post('/', validateName, productsController.insert);
 

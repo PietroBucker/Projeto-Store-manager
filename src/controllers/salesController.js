@@ -39,7 +39,7 @@ const salesDelete = async (req, res) => {
   if (result.type) {
     return res.status(404).json({ message: result.message });
   }
-    return res.status(204).json(result);
+    return res.status(204).json('');
 };
 
 module.exports = {

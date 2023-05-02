@@ -26,6 +26,24 @@ describe('Teste de unidade products services', function () {
     expect(productById.message).to.be.equal(allProductsMock[0])
   })
 
+  it('testa se retorna produtos buscado por query do banco de dados', async function () {
+    sinon.stub(productsModel, 'findByQuery').resolves(allProductsMock[0]);
+
+    const productById = await productsService.findByQuery('mar');
+    
+    expect(productById.type).to.be.equal(null)
+    expect(productById.message).to.be.equal(allProductsMock[0])
+  })
+
+  it('testa se buscando com query retorna erro Product not found se nao econtrado', async function () {
+    sinon.stub(productsModel, 'findByQuery').resolves(0);
+
+    const productById = await productsService.findByQuery(1);
+    
+    expect(productById.type).to.be.equal('PRODUCT_NOT_FOUND')
+    expect(productById.message).to.be.equal('Product not found')
+  });
+
   it('testa se retorna erro Product not found se nao econtrado', async function () {
     sinon.stub(productsModel, 'findById').resolves();
 
@@ -57,6 +75,24 @@ describe('Teste de unidade products services', function () {
     sinon.stub(productsModel, 'upDate').resolves(0);
 
     const productById = await productsService.upDate(1);
+    
+    expect(productById.type).to.be.equal('PRODUCT_NOT_FOUND')
+    expect(productById.message).to.equal('Product not found')
+  })
+
+  it('testa se consegue deletar um produto', async function () {
+    sinon.stub(productsModel, 'productDelete').resolves(1);
+
+    const productById = await productsService.productDelete(1);
+    
+    expect(productById.type).to.be.equal(null)
+    expect(productById.message).to.equal('')
+  })
+
+  it('testa se nao consegue deletar um produto', async function () {
+    sinon.stub(productsModel, 'productDelete').resolves(0);
+
+    const productById = await productsService.productDelete(1);
     
     expect(productById.type).to.be.equal('PRODUCT_NOT_FOUND')
     expect(productById.message).to.equal('Product not found')

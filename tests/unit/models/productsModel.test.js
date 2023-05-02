@@ -24,10 +24,10 @@ describe('Teste de unidade products model', function () {
     expect(result).to.be.equal(allProductsMock[0]);
   })
 
-  it('testa se retorna produtos buscado por id do banco de dados', async function () {
-    sinon.stub(connection, 'execute').resolves([allProductsMock]);
+  it('testa se retorna produtos buscado por query do banco de dados', async function () {
+    sinon.stub(connection, 'execute').resolves([allProductsMock[0]]);
 
-    const result = await productsModel.findById(1);
+    const result = await productsModel.findByQuery('mar');
   
     expect(result).to.be.equal(allProductsMock[0]);
   })
@@ -46,6 +46,14 @@ describe('Teste de unidade products model', function () {
     sinon.stub(connection, 'execute').resolves([{affectedRows: 1}]);
 
     const result = await productsModel.upDate(1);
+  
+    expect(result).to.equal(1);
+  })
+
+  it('testa se o produto e deletado com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{affectedRows: 1}]);
+
+    const result = await productsModel.productDelete(1);
   
     expect(result).to.equal(1);
   })

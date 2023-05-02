@@ -15,6 +15,14 @@ const findById = async (id) => {
   return result;
 };
 
+const findByQuery = async (name) => {
+  const [result] = await connection.execute(
+    'SELECT * FROM products WHERE name LIKE (?)',
+    [`%${name}%`],
+  );
+  return result;
+};
+
 const insert = async (productDate) => {
   const colums = Object.keys(productDate);
   const placehold = colums.map(() => '?').join(', ');
@@ -47,6 +55,7 @@ const productDelete = async (id) => {
 module.exports = {
   findAll,
   findById,
+  findByQuery,
   insert,
   upDate,
   productDelete,

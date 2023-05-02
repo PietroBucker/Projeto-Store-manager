@@ -14,6 +14,15 @@ const findById = async (req, res) => {
   res.status(200).json(productById.message);
 };
 
+const findByQuery = async (req, res) => {
+  const { q } = req.query; 
+  const result = await productsService.findByQuery(q);
+  if (result.type) {
+    return res.status(400).json({ message: result.message });
+  }
+    return res.status(200).json(result.message);
+};
+
 const insert = async (req, res) => {
   const { body } = req;
   const insertId = await productsService.insert(body);
@@ -42,6 +51,7 @@ const productDelete = async (req, res) => {
 module.exports = {
   findAll,
   findById,
+  findByQuery,
   insert,
   upDate,
   productDelete,
